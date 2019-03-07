@@ -1,3 +1,9 @@
+// register ServiceWorker, remember to use absolute path!
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/andreykondakov.github.io/sw.js', {scope: '/andreykondakov.github.io/'})
+}
+
+
 var geekhub = document.getElementById('btn-last-change');
 geekhub.addEventListener('click', function () {
   var div = document.createElement('div');
