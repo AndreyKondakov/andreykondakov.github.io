@@ -9,10 +9,10 @@ var URLS = [                            // Add URL you want to cache in this lis
 ];
 
 // Respond with cached resources
-self.addEventListener('fetch', function (e) {
+addEventListener('fetch', function (e) {
   console.log('fetch request : ' + e.request.url);
   e.respondWith(
-    caches.open(e.request).then(function (request) {
+    caches.match(e.request).then(function (request) {
       if (request) { // if cache is available, respond with cache
         console.log('responding with cache : ' + e.request.url);
         return request
@@ -28,7 +28,7 @@ self.addEventListener('fetch', function (e) {
 });
 
 // Cache resources
-self.addEventListener('install', function (e) {
+addEventListener('install', function (e) {
   e.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
       console.log('installing cache : ' + CACHE_NAME);
@@ -38,7 +38,7 @@ self.addEventListener('install', function (e) {
 });
 
 // Delete outdated caches
-self.addEventListener('activate', function (e) {
+addEventListener('activate', function (e) {
   e.waitUntil(
     caches.keys().then(function (keyList) {
       // `keyList` contains all cache names under your username.github.io
